@@ -1,0 +1,78 @@
+@HostName = localhost
+@Port = 5298
+###
+@Host = http://{{HostName}}:{{Port}}
+@Todo = {{Host}}/Todo
+@Board = {{Host}}/Board
+###
+@TestTodoId = 500a2748-cf5e-4bcd-f088-08db6d52c705
+@TestBoardId = 4be1c957-ee48-442c-404c-08db6cdb37f3
+###
+
+POST {{Todo}}/Create
+Content-Type: application/json
+{
+    "BoardId": "{{TestBoardId}}"
+    "Title":"HelloWorld"
+}
+
+###
+
+GET {{Todo}}/Get?Id={{TestTodoId}}
+
+###
+PUT {{Todo}}/UpdateTitle
+Content-Type: application/json
+{
+    "Id": "{{TestTodoId}}",
+    "Title": "NewTitle"
+}
+
+###
+
+PUT {{Todo}}/UpdateStatus
+Content-Type: application/json
+{
+    "Id": "{{TestTodoId}}",
+    "IsDone": true
+}
+
+###
+
+DELETE {{Todo}}/Delete?Id{{TestTodoId}}
+
+
+###
+POST {{Board}}/Create
+Content-Type: application/json
+{
+    "Title": "TestBoard"
+}
+
+###
+
+GET {{Board}}/Get?Id={{TestBoardId}}&IncludeTodos=true
+
+###
+
+GET {{Board}}/GetAll
+
+###
+
+GET {{Board}}/GetUndone?BoardId{{TestBoardId}}
+
+###
+
+DELETE {{Board}}/Delete?Id{{TestBoardId}}
+
+###
+
+PUT {{Board}}/rename
+Accept: */*
+Content-Type: application/json
+{
+    "Id": "{{TestBoardId}}",
+    "Title": "TestTilte"
+}
+
+###
