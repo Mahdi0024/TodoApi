@@ -9,7 +9,6 @@ namespace TodoApi.Services;
 public sealed class TodoService : ITodoService
 {
     private readonly TodoDbContext _db;
-
     public TodoService(TodoDbContext db)
     {
         _db = db;
@@ -70,7 +69,7 @@ public sealed class TodoService : ITodoService
         var todo = await GetTodo(todoId);
 
         _db.Todos.Remove(todo);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
     }
 
     public async Task DeleteBoard(Guid boardId)
@@ -78,7 +77,7 @@ public sealed class TodoService : ITodoService
         var board = await GetBoard(boardId);
 
         _db.Boards.Remove(board);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<Board>> GetBoards()

@@ -34,19 +34,19 @@ public sealed class TodoController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateTitle(UpdateTitleRequest request)
+    public async Task<IActionResult> UpdateTitle([FromBody] UpdateTitleRequest request)
     {
         return Ok(await _todoService.UpdateTodoTitle(request.Id, request.Title));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateStatus(UpdateTodoStatusRequest request)
+    public async Task<IActionResult> UpdateStatus( [FromBody] UpdateTodoStatusRequest request)
     {
         return Ok(await _todoService.UpdateTodoStatus(request.Id, request.IsDone));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateTodoRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateTodoRequest request)
     {
         return Ok(await _todoService.CreateTodo(request.BoardId, request.Title));
     }

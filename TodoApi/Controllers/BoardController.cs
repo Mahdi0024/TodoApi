@@ -23,7 +23,7 @@ public sealed class BoardController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] GetBoardRequest request)
+    public async Task<IActionResult> Get(GetBoardRequest request)
     {
         return Ok(await _todoService.GetBoard(request.Id, request.IncludeTodos));
     }
@@ -35,13 +35,13 @@ public sealed class BoardController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateBoardRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateBoardRequest request)
     {
-        return Ok(await _todoService.CreateBoard(request.Name));
+        return Ok(await _todoService.CreateBoard(request.Title));
     }
 
     [HttpPut]
-    public async Task<IActionResult> Rename(UpdateTitleRequest request)
+    public async Task<IActionResult> Rename([FromBody] UpdateTitleRequest request)
     {
         return Ok(await _todoService.EditBoardTitle(request.Id, request.Title));
     }
